@@ -72,16 +72,47 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
       body: TabBarView(
         controller: _tcontrol,
         children: [
-          Center(
-            child: Text('This is home tab. $mtext'),
+          Column(
+            children: [
+              TextField(
+                onSubmitted: (String txt) {
+                  setState(() {
+                    mtext = txt;
+                  });
+                },
+                decoration:
+                    InputDecoration(hintText: 'Type here', labelText: 'Name'),
+              ),
+              Text(mtext),
+            ],
           ),
+          //Center(
+          //child: Text('This is home tab. $mtext'),
+          //),
           Center(
-            child: Text('This is user tab'),
+            child: Text('This is user tab. $mtext'),
           ),
           Center(
             child: Text('This is close tab'),
           )
         ],
+      ),
+      bottomNavigationBar: Material(
+        color: Colors.yellow,
+        child: TabBar(
+          controller: _tcontrol,
+          tabs: [
+            Tab(
+              icon: Icon(Icons.home),
+            ),
+            Tab(
+              icon: Icon(Icons.supervisor_account),
+            ),
+            Tab(
+              icon: Icon(Icons.close),
+            ),
+          ],
+        ),
       ),
     );
   }
